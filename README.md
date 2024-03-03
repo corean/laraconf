@@ -21,3 +21,8 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 2. Intoruction to Filament 
 : 이제 Filament를 설치하고 패널 빌더를 사용하여 애플리케이션을 생성할 수 있습니다. 약간의 작업만 하면 모델용 양식과 테이블이 포함된 아름답고 기능적인 응용 프로그램이 놀라울 정도로 완성될 것입니다.
+
+3. Basic Form Inputs
+: 다양한 기본 필라멘트 양식 입력을 사용하는 방법과 유효성 검사를 구현하고 구성 요소의 모양과 느낌을 수정하는 방법을 알아보세요.
+
+4. 

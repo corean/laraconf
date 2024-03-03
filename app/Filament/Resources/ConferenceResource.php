@@ -10,8 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Validation\Rule;
 
 class ConferenceResource extends Resource
 {
@@ -24,7 +23,9 @@ class ConferenceResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required(),
+                    ->label('Conference Name')
+                    ->rules(['required', 'string', 'max:60'])
+                    ->markAsRequired(),
                 Forms\Components\TextInput::make('description')
                     ->required(),
                 Forms\Components\DateTimePicker::make('start_date')
@@ -93,9 +94,9 @@ class ConferenceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListConferences::route('/'),
+            'index'  => Pages\ListConferences::route('/'),
             'create' => Pages\CreateConference::route('/create'),
-            'edit' => Pages\EditConference::route('/{record}/edit'),
+            'edit'   => Pages\EditConference::route('/{record}/edit'),
         ];
     }
 }
