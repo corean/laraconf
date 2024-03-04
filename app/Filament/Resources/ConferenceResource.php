@@ -2,15 +2,17 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\Region;
 use App\Filament\Resources\ConferenceResource\Pages;
 use App\Filament\Resources\ConferenceResource\RelationManagers;
 use App\Models\Conference;
+use App\Models\Venue;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Builder;
 
 class ConferenceResource extends Resource
 {
@@ -26,18 +28,38 @@ class ConferenceResource extends Resource
                     ->label('Conference Name')
                     ->rules(['required', 'string', 'max:60'])
                     ->markAsRequired(),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\MarkdownEditor::make('description')
                     ->required(),
                 Forms\Components\DateTimePicker::make('start_date')
                     ->required(),
                 Forms\Components\DateTimePicker::make('end_date')
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Checkbox::make('is_published')
+                    ->default(true),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'draft'     => 'Draft',
+                        'published' => 'Published',
+                        'cancelled' => 'Cancelled',
+                    ])
                     ->required(),
-                Forms\Components\TextInput::make('region')
+                Forms\Components\Select::make('region')
+                    ->enum(Region::class)
+                    ->options(Region::class)
+                    ->live()
                     ->required(),
                 Forms\Components\Select::make('venue_id')
-                    ->relationship('venue', 'name'),
+                    ->searchable()
+                    ->preload()
+                    ->editOptionForm( Venue::getForm())
+                    ->createOptionForm( Venue::getForm())
+                    ->relationship(
+                        name: 'venue',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: function (Builder $query, Forms\Get $get) {
+                            ray($query->toSql(), $get('region'));
+                            return $query->where('region', $get('region'));
+                        }),
             ]);
     }
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('end_date');
             $table->string('status');
             $table->string('region');
+            $table->boolean('is_published')->default(false);
             $table->foreignIdFor(Venue::class)->nullable();
             $table->timestamps();
         });

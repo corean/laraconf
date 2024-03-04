@@ -25,4 +25,5 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 3. Basic Form Inputs
 : 다양한 기본 필라멘트 양식 입력을 사용하는 방법과 유효성 검사를 구현하고 구성 요소의 모양과 느낌을 수정하는 방법을 알아보세요.
 
-4. 
+4. Select Input
+: 필라멘트는 특정 입력에 대해 놀라운 기능을 제공합니다. 기본 브라우저 선택, 콤보 상자 및 종속 선택을 사용하는 방법을 알아봅니다.
