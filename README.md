@@ -30,3 +30,7 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 5. Checkbox List
 : 데이터 배열을 저장할 때 CheckboxList 양식 입력을 사용하여 여러 개를 선택하고 데이터베이스를 업데이트할 수 있습니다.
+
+6. Layouts
+: 우리의 양식은 기능적이지만 이제 보기 좋게 만들어 보겠습니다. 필라멘트는 양식의 모양과 느낌을 사용자 정의할 수 있는 다양한 방법을 제공합니다.
+

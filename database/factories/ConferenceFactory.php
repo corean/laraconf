@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Region;
 use App\Models\Conference;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,7 +26,7 @@ class ConferenceFactory extends Factory
             'start_date'  => $this->faker->dateTime(),
             'end_date'    => $this->faker->dateTime(),
             'status'      => $this->faker->word(),
-            'region'      => $this->faker->word(),
+            'region'      => $this->faker->randomElement(Region::class),
             'is_published'=> $this->faker->boolean(),
             'venue_id'    => null,
         ];
