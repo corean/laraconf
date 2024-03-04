@@ -27,3 +27,6 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 4. Select Input
 : 필라멘트는 특정 입력에 대해 놀라운 기능을 제공합니다. 기본 브라우저 선택, 콤보 상자 및 종속 선택을 사용하는 방법을 알아봅니다.
+
+5. Checkbox List
+: 데이터 배열을 저장할 때 CheckboxList 양식 입력을 사용하여 여러 개를 선택하고 데이터베이스를 업데이트할 수 있습니다.
