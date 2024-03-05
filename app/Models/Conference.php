@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Region;
 use Filament\Forms;
+use Filament\Forms\Components\Actions;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -93,8 +94,20 @@ class Conference extends Model
                                 ray($query->toSql(), $get('region'));
                                 return $query->where('region', $get('region'));
                             }),
+                    Actions::make([
+                        Actions\Action::make('star')
+                            ->label('Fill with Factory Data')
+                            ->icon('heroicon-m-star')
+                            ->visible(function (string $operation) {
+                                return $operation === 'create' && app()->environment('local');
+                            })
+                            ->action(function ($livewire) {
+                                $conference = Conference::factory()->make()->toArray();
+                                unset($conference['venue_id']);
+                                $livewire->form->fill($conference);
+                            }),
+                    ]),
                 ]),
-
 
             Forms\Components\CheckboxList::make('speakers')
                 ->columnSpanFull()

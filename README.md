@@ -34,3 +34,5 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 6. Layouts
 : 우리의 양식은 기능적이지만 이제 보기 좋게 만들어 보겠습니다. 필라멘트는 양식의 모양과 느낌을 사용자 정의할 수 있는 다양한 방법을 제공합니다.
 
+7. Fill Forms with Factory Data
+: 팩토리 데이터를 사용하여 양식을 작성하여 애플리케이션의 수동 테스트 속도를 높이세요.
