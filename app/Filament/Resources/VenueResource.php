@@ -23,9 +23,7 @@ class VenueResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Venue::getForm(),
-            ]);
+            ->schema(Venue::getForm());
     }
 
     public static function table(Table $table): Table
