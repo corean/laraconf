@@ -36,3 +36,6 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 7. Fill Forms with Factory Data
 : 팩토리 데이터를 사용하여 양식을 작성하여 애플리케이션의 수동 테스트 속도를 높이세요.
+
+8. File Uploads
+: Filament는 파일 업로드를 위해 FilePond를 사용합니다. 이는 사용자에게 멋진 UX를 제공하고 추가 기능을 제공합니다. Filament는 인기 있는 Spatie Media Library와의 자사 통합도 제공합니다.package.

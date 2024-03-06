@@ -35,15 +35,21 @@ class Speaker extends Model
             Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),
+            Forms\Components\FileUpload::make('avatar')
+                ->avatar()
+                ->maxSize(1024 * 1024 * 2)
+            // ->preview(fn (Speaker $speaker) => $speaker->avatar)
+            // ->delete(function (Speaker $speaker) {
+            //     $speaker->update(['avatar' => null]);
+            // })
+            ,
             Forms\Components\TextInput::make('email')
                 ->email()
                 ->required()
                 ->maxLength(255),
             Forms\Components\Textarea::make('bio')
-                ->required()
                 ->columnSpanFull(),
-            Forms\Components\TextInput::make('twitter_handle')
-                ->required(),
+            Forms\Components\TextInput::make('twitter_handle'),
             Forms\Components\CheckboxList::make('qualifications')
                 ->columnSpanFull()
                 ->columns(3)
@@ -51,9 +57,8 @@ class Speaker extends Model
                 ->options(static::QUALIFICATIONS)
                 ->descriptions([
                     'business-leader' => 'Here is a nice long description',
-                    'charisma' => 'This is even more information about why you should pick this one',
-                ])
-                ->required(),
+                    'charisma'        => 'This is even more information about why you should pick this one',
+                ]),
         ];
     }
 
