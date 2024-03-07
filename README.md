@@ -46,4 +46,5 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 10. Table Filters
 : 필라멘트는 테이블을 필터링하는 다양한 방법을 제공합니다. 그 중 몇 가지를 구현하고 사용자가 필요한 데이터를 찾을 수 있도록 도와드리겠습니다.
 
-ternary
+11. Table Actions
+: 필라멘트에는 테이블과 함께 사용할 수 있는 세 가지 유형의 작업이 있습니다. 우리는 세 가지를 모두 사용하여 테이블 레코드와 상호 작용하는 방법을 배웁니다.

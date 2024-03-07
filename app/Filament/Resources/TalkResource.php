@@ -8,9 +8,11 @@ use App\Filament\Resources\TalkResource\Pages;
 use App\Models\Talk;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class TalkResource extends Resource
@@ -34,11 +36,14 @@ class TalkResource extends Resource
             ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
             ->persistFiltersInSession()
-            ->filtersTriggerAction(function($action) {
+            ->filtersTriggerAction(function ($action) {
                 return $action->button()->label('filters');
             })
             ->columns([
@@ -96,11 +101,63 @@ class TalkResource extends Resource
                     }),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\Action::make('approve')
+                        ->label('Approve')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->visible(fn (Talk $talk) => $talk->status === TalkStatus::SUBMITTED)
+                        ->action(fn (Talk $talk) => $talk->update(['status' => TalkStatus::APPROVED]))
+                        ->after(function () {
+                            Notification::make()
+                                ->success()
+                                ->title('Talk Approved')
+                                ->duration(1000)
+                                ->body('The talk has been approved.')
+                                ->send();
+                        }),
+                    Tables\Actions\Action::make('reject')
+                        ->label('Reject')
+                        ->icon('heroicon-o-no-symbol')
+                        ->color('danger')
+                        ->visible(fn (Talk $talk) => $talk->status === TalkStatus::SUBMITTED)
+                        ->action(fn (Talk $talk) => $talk->update(['status' => TalkStatus::REJECTED]))
+                        ->after(function () {
+                            Notification::make()
+                                ->danger()
+                                ->title('Talk Approved')
+                                ->duration(1000)
+                                ->body('The talk has been approved.')
+                                ->send();
+                        }),
+                ]),
+
+            ])
+            ->headerActions([
+                Tables\Actions\Action::make('export')
+                    ->label('Export')
+                    ->action(function (Forms\Components\Livewire $livewire) {
+                        ray($livewire->getFilteredTableQuery());
+                        ray('Exporting talks...');
+                    }),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkAction::make('approve')
+                        ->label('Approve')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->action(fn (Collection $talks) => $talks->each->update(['status' => TalkStatus::APPROVED])),
+                    Tables\Actions\BulkAction::make('reject')
+                        ->label('Reject')
+                        ->icon('heroicon-o-no-symbol')
+                        ->color('danger')
+                        ->action(fn (Collection $talks) => $talks->each->update(['status' => TalkStatus::REJECTED])),
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -117,7 +174,7 @@ class TalkResource extends Resource
         return [
             'index'  => Pages\ListTalks::route('/'),
             'create' => Pages\CreateTalk::route('/create'),
-            'edit'   => Pages\EditTalk::route('/{record}/edit'),
+            // 'edit'   => Pages\EditTalk::route('/{record}/edit'),
         ];
     }
 }
