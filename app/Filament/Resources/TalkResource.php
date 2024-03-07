@@ -65,16 +65,31 @@ class TalkResource extends Resource
                 Tables\Columns\IconColumn::make('length')
                     ->icon(function ($state) {
                         return match ($state) {
-                            TalkLength::NORMAL => 'heroicon-o-megaphone',
+                            TalkLength::NORMAL    => 'heroicon-o-megaphone',
                             TalkLength::LIGHTNING => 'heroicon-o-bolt',
-                            TalkLength::KEYNOTE => 'heroicon-o-key',
+                            TalkLength::KEYNOTE   => 'heroicon-o-key',
                         };
                     })
                     ->label('Length')
                     ->sortable(),
             ])
             ->filters([
-                //
+                Tables\Filters\TernaryFilter::make('new_talk')
+                    ->label('New Talk'),
+                Tables\Filters\SelectFilter::make('speaker')
+                    ->label('Speaker')
+                    ->relationship('speaker', 'name')
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\Filter::make('avatar')
+                    ->label('show only speakers with avatars')
+                    ->toggle()
+                    ->query(function ($query) {
+                        return $query->whereHas('speaker', function ($query) {
+                            $query->whereNotNull('avatar');
+                        });
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

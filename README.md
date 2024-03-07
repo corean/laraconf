@@ -42,3 +42,8 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 9. Table Columns
 : 우리는 Filament의 테이블 열 클래스 중 다수를 사용하여 테이블에 데이터를 표시할 것입니다.
+
+10. Table Filters
+: 필라멘트는 테이블을 필터링하는 다양한 방법을 제공합니다. 그 중 몇 가지를 구현하고 사용자가 필요한 데이터를 찾을 수 있도록 도와드리겠습니다.
+
+ternary
