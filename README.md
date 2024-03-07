@@ -39,3 +39,6 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 8. File Uploads
 : Filament는 파일 업로드를 위해 FilePond를 사용합니다. 이는 사용자에게 멋진 UX를 제공하고 추가 기능을 제공합니다. Filament는 인기 있는 Spatie Media Library와의 자사 통합도 제공합니다.package.
+
+9. Table Columns
+: 우리는 Filament의 테이블 열 클래스 중 다수를 사용하여 테이블에 데이터를 표시할 것입니다.
