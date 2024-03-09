@@ -54,3 +54,6 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 13. Relation Managers
 : 모델에 관련 모델이 있는 경우 관계 관리자는 이러한 관계를 시각화하고 수정하는 데 매우 뛰어납니다. 관계 관리자 클래스는 필라멘트 패널 내에서만 사용할 수 있습니다.
+
+14. Using Filament Outside of Panels
+: 필라멘트는 패널에만 사용되는 것이 아닙니다. 우리는 오래된 라이브와이어 구성요소에서 양식과 동작을 구현할 것입니다.
