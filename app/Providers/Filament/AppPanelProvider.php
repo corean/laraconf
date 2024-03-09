@@ -10,6 +10,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentView;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -62,7 +63,7 @@ class AppPanelProvider extends PanelProvider
     /**
      * hot reload
      */
-    public function register():void
+    public function register(): void
     {
         parent::register();
 
@@ -70,6 +71,12 @@ class AppPanelProvider extends PanelProvider
             'panels::body.end',
             static fn () => Blade::render("@vite('resources/js/app.js')")
         );
+    }
 
+    public function boot(): void
+    {
+        \Filament\Tables\Actions\CreateAction::configureUsing(static function ($action) {
+            return $action->slideOver();
+        });
     }
 }

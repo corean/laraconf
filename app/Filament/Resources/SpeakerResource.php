@@ -90,7 +90,6 @@ class SpeakerResource extends Resource
                                     })
                                     ->badge()
                                     ->color(function ($state) {
-                                        ray($state)->label('State');
                                         return $state === 'Previous Speaker' ? 'success' : 'primary';
                                     }),
                             ]),
@@ -109,7 +108,7 @@ class SpeakerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'talks' => RelationManagers\TalksRelationManager::class,
         ];
     }
 
