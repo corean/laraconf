@@ -60,3 +60,7 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 15. Widgets
 : 위젯은 테이블의 데이터를 표시하는 강력한 방법을 제공합니다. 다양한 유형의 위젯이 있으며 이를 테이블 필터와 통합할 수도 있습니다.
+
+16. Notifications
+: Filament는 사용자에게 알림을 보낼 수 있는 알림 클래스를 제공합니다. 이러한 알림은 애플리케이션의 요구 사항에 맞게 사용자 정의할 수 있습니다.
+
