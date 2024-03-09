@@ -64,3 +64,6 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 16. Notifications
 : Filament는 사용자에게 알림을 보낼 수 있는 알림 클래스를 제공합니다. 이러한 알림은 애플리케이션의 요구 사항에 맞게 사용자 정의할 수 있습니다.
 
+17. Configuring Panels
+: Filament는 패널의 모양과 느낌은 물론 기능까지 맞춤 설정할 수 있는 구성 옵션을 제공합니다. 동일한 애플리케이션에서 여러 패널을 사용할 수도 있습니다.
+ 
