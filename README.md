@@ -48,3 +48,6 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 11. Table Actions
 : 필라멘트에는 테이블과 함께 사용할 수 있는 세 가지 유형의 작업이 있습니다. 우리는 세 가지를 모두 사용하여 테이블 레코드와 상호 작용하는 방법을 배웁니다.
+
+12. Infolists
+: 사용자 정의 페이지에서 기록을 보려면 Filament는 해당 기록의 레이아웃과 표시를 사용자 정의할 수 있는 정보 목록을 제공합니다.

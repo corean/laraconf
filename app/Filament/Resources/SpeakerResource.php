@@ -2,16 +2,19 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\TalkStatus;
 use App\Filament\Resources\SpeakerResource\Pages;
 use App\Filament\Resources\SpeakerResource\RelationManagers;
 use App\Models\Speaker;
-use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Group;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SpeakerResource extends Resource
 {
@@ -33,7 +36,7 @@ class SpeakerResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('twitter_handle')
+                Tables\Columns\TextColumn::make('twitter')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -48,12 +51,58 @@ class SpeakerResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->columns(3)
+            ->schema([
+                Section::make('Personal Information')
+                    ->columns(3)
+                    ->schema([
+                        ImageEntry::make('avatar')
+                            ->circular(),
+                        Group::make()
+                            ->label('Personal Information')
+                            ->columnSpan(2)
+                            ->columns(2)
+                            ->schema([
+                                TextEntry::make('name'),
+                                TextEntry::make('email'),
+                                TextEntry::make('twitter_handle')
+                                    ->label('Twitter')
+                                    ->getStateUsing(fn ($record) => "@{$record->twitter_handle}")
+                                    ->url(fn ($record) => "https://twitter.com/{$record->twitter_handle}"),
+                                TextEntry::make('talks')
+                                    ->label('Has spoken')
+                                    ->getStateUsing(function ($record) {
+                                        return $record->talks()->where('status', TalkStatus::APPROVED)->count() > 0
+                                            ? 'Previous Speaker'
+                                            : 'Has Not Spoken';
+                                    })
+                                    ->badge()
+                                    ->color(function ($state) {
+                                        ray($state)->label('State');
+                                        return $state === 'Previous Speaker' ? 'success' : 'primary';
+                                    }),
+                            ]),
+                    ]),
+                Section::make('Additional Information')
+                    ->schema([
+                        TextEntry::make('bio')
+                            ->extraAttributes(['class' => 'prose dark:prose-invert'])
+                            ->html(),
+                        TextEntry::make('qualifications')
+                            ->bulleted(),
+                    ]),
             ]);
     }
 
@@ -67,9 +116,10 @@ class SpeakerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSpeakers::route('/'),
+            'index'  => Pages\ListSpeakers::route('/'),
             'create' => Pages\CreateSpeaker::route('/create'),
-            'edit' => Pages\EditSpeaker::route('/{record}/edit'),
+            // 'edit'   => Pages\EditSpeaker::route('/{record}/edit'),
+            'view'   => Pages\ViewSpeaker::route('/{record}'),
         ];
     }
 }
