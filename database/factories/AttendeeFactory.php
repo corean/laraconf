@@ -17,11 +17,13 @@ class AttendeeFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
             'name'        => $this->faker->name(),
             'email'       => $this->faker->safeEmail(),
             'ticket_cost' => 50000,
             'is_paid'     => true,
+            'created_at'  => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 

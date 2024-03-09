@@ -57,3 +57,6 @@ https://laracasts.com/series/rapid-laravel-development-with-filament
 
 14. Using Filament Outside of Panels
 : 필라멘트는 패널에만 사용되는 것이 아닙니다. 우리는 오래된 라이브와이어 구성요소에서 양식과 동작을 구현할 것입니다.
+
+15. Widgets
+: 위젯은 테이블의 데이터를 표시하는 강력한 방법을 제공합니다. 다양한 유형의 위젯이 있으며 이를 테이블 필터와 통합할 수도 있습니다.

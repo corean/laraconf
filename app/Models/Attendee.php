@@ -11,6 +11,11 @@ class Attendee extends Model
 {
     use HasFactory;
 
+    public function conference(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Conference::class);
+    }
+
     public static function getForm(): array
     {
         return [
@@ -26,10 +31,5 @@ class Attendee extends Model
                 ]),
 
         ];
-    }
-
-    public function conference(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Conference::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Conference;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'corean',
             'email' => 'corean@corean.biz',
         ]);
+
+        Conference::factory(10)->create();
     }
 }
